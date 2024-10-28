@@ -35,6 +35,18 @@
 </head>
 
 <body>
+
+    <script>
+        // Check if user is logged in by checking for a token in localStorage
+        const isLoggedIn = localStorage.getItem('accessToken');
+
+        if (!isLoggedIn) {
+            // Redirect unauthenticated users to the login page
+            window.location.href = 'login.html';
+        }
+    </script>
+
+
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
@@ -64,6 +76,7 @@
     </div>
     <!-- Topbar End -->
 
+
     <!-- Navbar & Hero Start -->
     <div class="container-fluid position-relative p-0">
         <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
@@ -82,16 +95,14 @@
                     <a href="heritage.html" class="nav-item nav-link active">Heritage Sites</a>
                     <a href="contact.html" class="nav-item nav-link">Contact</a>
                 </div>
-                <a href="register.html" class="btn btn-primary rounded-pill py-2 px-4">Register</a>
-                <a href="login.html" class="btn btn-secondary rounded-pill py-2 px-4">Login</a>
+                <a href="register.html" id="registerButton" class="btn btn-primary rounded-pill py-2 px-4">Register</a>
+                <a href="login.html" id="loginButton" class="btn btn-secondary rounded-pill py-2 px-4">Login</a>
             </div>
         </nav>
         
     <!-- Navbar & Hero End -->
 
  
-    
-
         <!-- Map Modal -->
         <div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="mapModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -109,9 +120,6 @@
 
 
 
-
-
-
     <!-- Package Start -->
     <div class="container-xxl py-5">
         <div class="container">
@@ -121,15 +129,16 @@
             </div>
 
             <div class="row g-4 justify-content-center">
-                <div class="col-lg-4 col-md-6 wow fadeInUp" onclick="showLocation('LOCATION1_KML_URL', [6.8610, 7.3912])" data-wow-delay="0.1s">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="package-item">
-                        <div class="overflow-hidden">
+                        <div class="overflow-hidden" onclick="showLocation('LOCATION1_KML_URL', [6.8610, 7.3912])">
                             <img style="object-fit: cover;height: 250px;width: 100%;" src="img/Adaada House Mysterious Stream.jpg" alt="">
                         </div>
                         <div class="d-flex border-bottom">
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>Adaada House Mysterious Stream, Enugu</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>Adaada House Mysterious Stream, Nsukka Main Town</small>
                         </div>
                         <div class="text-center p-4">
+
                             <!-- <h3 class="mb-0">$149.00</h3> -->
                             <div class="mb-3">
                                 <small class="fa fa-star text-primary"></small>
@@ -138,18 +147,43 @@
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
                             </div>
+
                             <p>To know more click to View</p>
                             <div class="d-flex justify-content-center mb-2">
-                                <a href="login.html" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 30px 30px 30px;">View</a>
+                                <a class="btn btn-sm btn-primary px-3 border-end"  data-bs-toggle="modal" data-bs-target="#exampleModal1" style="border-radius: 30px 30px 30px 30px;">ReadMore</a>
                                 <!-- <a href="#" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a> -->
                             </div>
+
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-md-6 wow fadeInUp"  onclick="showLocation('LOCATION1_KML_URL', [6.4385, 7.4937])" data-wow-delay="0.3s">
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Heritage Information</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    The building was a Northern Nigerian Architectural concept structure built by laborers from Northern Nigeria in 1911. The exterior was modernized to adapt modern functions. However, it still retains the interior design conceptualized from Northern Nigeria architecture.
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+
+
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="package-item">
-                        <div class="overflow-hidden">
+                        <div class="overflow-hidden" onclick="showLocation('LOCATION1_KML_URL', [6.4385, 7.4937])">
                             <img style="object-fit: cover;height: 250px;width: 100%;" src="img/NCNC House.jpg" alt="">
                         </div>
                         <div class="d-flex border-bottom">
@@ -168,20 +202,45 @@
                             </div>
                             <p>To know more click to View</p>
                             <div class="d-flex justify-content-center mb-2">
-                                <a href="login.html" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 30px 30px 30px;">View</a>
+                                <a class="btn btn-sm btn-primary px-3 border-end" data-bs-toggle="modal" data-bs-target="#exampleModal2" style="border-radius: 30px 30px 30px 30px;">ReadMore</a>
                                 <!-- <a href="#" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a> -->
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" onclick="showLocation('LOCATION1_KML_URL', [6.5298, 7.1427])" data-wow-delay="0.5s">
+
+                 <!-- Modal -->
+                 <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Heritage Information</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                The building was used by the first political party in Nigeria, COMMON NAME National Council of the Nigerians and the Cameroons (NCNC) HouseNCNC that produced the first President  of Nigeria Sir Nnamdi Azikiwe and the first Mayor of Enugu, Mallam Umaru Altine 
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="package-item">
-                        <div class="overflow-hidden h-75">
+                        <div class="overflow-hidden h-75" onclick="showLocation('LOCATION1_KML_URL', [6.5298, 7.1427])">
                             <img style="object-fit: cover;height: 250px;width: 100%;" class="" src="img/St. Lukes Catholc Church.jpg" alt="">
                         </div>
                  
                         <div class="text-center p-4">
-                            <h3 class="mb-0">St. Lukes Catholc Church</h3>
+                            <h3 class="mb-0">St. Lukes Catholc Church, Awhum- Ukana Udi</h3>
                             <div class="mb-3">
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
@@ -191,11 +250,33 @@
                             </div>
                             <p>To know more click to View</p>
                             <div class="d-flex justify-content-center mb-2">
-                                <a href="login.html" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 30px 30px 30px;">View</a>
+                                <a class="btn btn-sm btn-primary px-3 border-end" data-bs-toggle="modal" data-bs-target="#exampleModal3" style="border-radius: 30px 30px 30px 30px;">ReadMore</a>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                 <!-- Modal -->
+                 <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Heritage Information</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                A Place of worship built using burnt literite bricks.
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>
@@ -276,46 +357,56 @@
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-kml/1.0.0/leaflet-kml.min.js"></script>
 
-  <script>
-    // Initialize the Leaflet map
-    const modalMap = L.map("modalMap").setView([9.0820, 8.6753], 6); // Center map on Nigeria by default
 
-    // Add OpenStreetMap tiles
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        maxZoom: 18,
-        attribution: '© OpenStreetMap contributors',
-    }).addTo(modalMap);
+    <script>
+        // Initialize the Leaflet map
+        const modalMap = L.map("modalMap").setView([9.0820, 8.6753], 6); // Center map on Nigeria by default
 
-    let currentLayer;
+        // Add OpenStreetMap tiles
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            maxZoom: 18,
+            attribution: '© OpenStreetMap contributors',
+        }).addTo(modalMap);
 
-    // Function to load a KML layer and show the modal
-    function showLocation(kmlUrl, center) {
-        if (currentLayer) {
-            modalMap.removeLayer(currentLayer); // Remove existing layer if any
+        let currentLayer, currentMarker;
+
+        // Function to load a KML layer and show the modal
+        function showLocation(kmlUrl, center) {
+            if (currentLayer) {
+                modalMap.removeLayer(currentLayer); // Remove existing layer if any
+            }
+
+            if (currentMarker) {
+                modalMap.removeLayer(currentMarker); // Remove existing marker if any
+            }
+
+            // Set map center
+            modalMap.setView(center, 10);
+
+            // Add a yellow circle marker for the location
+            currentMarker = L.circleMarker(center, {
+                color: "yellow",
+                radius: 10,
+                fillColor: "yellow",
+                fillOpacity: 0.8
+            }).addTo(modalMap);
+
+            // Show the modal
+            const mapModal = new bootstrap.Modal(document.getElementById("mapModal"));
+            mapModal.show();
+
+            // Adjust map size once the modal is fully shown
+            document.getElementById("mapModal").addEventListener("shown.bs.modal", function () {
+                modalMap.invalidateSize();
+            });
         }
 
-        // Set map center
-        modalMap.setView(center, 10);
+        if (isLoggedIn) {
+            document.getElementById('registerButton').style.display = 'none';
+            document.getElementById('loginButton').style.display = 'none';
+        }
+    </script>
 
-        // Load the KML layer
-        fetch(kmlUrl)
-            .then(response => response.text())
-            .then(kmlText => {
-                currentLayer = new L.KML(kmlText);
-                modalMap.addLayer(currentLayer);
-            })
-            .catch(error => console.error("Error loading KML file:", error));
-
-        // Show the modal
-        const mapModal = new bootstrap.Modal(document.getElementById("mapModal"));
-        mapModal.show();
-
-        // Adjust map size once the modal is fully shown
-        document.getElementById("mapModal").addEventListener("shown.bs.modal", function () {
-            modalMap.invalidateSize();
-        });
-    }
-</script>
 
 </body>
 
