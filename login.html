@@ -274,6 +274,8 @@
 
                         const accessToken = data.accessToken; // Change this according to your API response
                         localStorage.setItem('accessToken', accessToken);
+
+                        window.location.href = 'heritage.html';
                         
                     } else {
                         loginMessage.textContent = "Incorrect email or password.";

@@ -239,6 +239,7 @@
                     const result = await response.json();
                     loginMessage.textContent = "SignUp successful!";
                     loginMessage.style.color = "green";
+                    window.location.href = 'login.html';
                     console.log(result);
                 } else {
                     const error = await response.json();
